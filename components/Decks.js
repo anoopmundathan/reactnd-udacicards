@@ -1,22 +1,30 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const Deck = (props) => {
-  return(
-    <View style={styles.boxContainer}>
-      <View style={styles.box}>
-        <Text style={styles.title}>{props.deck}</Text>
+class Deck extends Component {
+  render() {
+    const { deck, count } = this.props
+    return(
+      <View style={styles.boxContainer}>
+        <View style={styles.box}>
+          <Text style={styles.title}>{deck}</Text>
+          <Text style={styles.count}>{count} cards</Text>
+        </View>
       </View>
-    </View>
-  )
+    )
+  }
 }
+
 
 class Decks extends Component {
   render() {
     const { decks } = this.props
     return(
       <View style={styles.deckContainer}>
-        {decks.map(deck => <Deck deck={deck.name} />)}
+        {decks.map(deck => <Deck 
+          key={deck.name}
+          deck={deck.name} 
+          count={deck.cards} />)}
       </View>
     )
   }
@@ -38,10 +46,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   title: {
     fontSize: 25,
+    color: '#fff'
+  },
+  count: {
+    fontSize: 16,
     color: '#fff'
   }
 })

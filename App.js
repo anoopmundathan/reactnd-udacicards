@@ -4,22 +4,32 @@ import Decks from './components/Decks'
 
 const decks = [
   {
-    name: 'deck1'
+    name: 'UdaciCards',
+    cards: 1
   },
   {
-    name: 'deck2'
+    name: 'React Cards',
+    cards: 0
   },
   {
-    name: 'deck3'
+    name: 'New Deck1',
+    cards: 3
   },
   {
-    name: 'deck4'
+    name: 'deck4',
+    cards: 2
   },
   {
-    name: 'deck5'
+    name: 'deck5',
+    cards: 5
   },
   {
-    name: 'deck6'
+    name: 'deck6',
+    cards: 0
+  },
+  {
+    name: 'deck7',
+    cards: 0
   }
 ]
 
