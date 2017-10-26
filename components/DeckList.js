@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+  ScrollView,
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity } from 'react-native'
 
 const decksItems = [
   {
@@ -48,20 +53,20 @@ class Deck extends Component {
   }
 }
 
-class Decks extends Component {
+class DeckList extends Component {
   onDeckPress = (deck) => {
     this.props.navigation.navigate('DeckDetails', deck)
   }
 
   render() {
     return(
-      <View style={styles.deckContainer}>
+      <ScrollView style={styles.deckContainer}>
         {decksItems.map(deck => <Deck
           key={deck.name}
           deck={deck.name}
           onDeckPress={this.onDeckPress} 
           count={deck.cards} />)}
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -69,11 +74,10 @@ class Decks extends Component {
 const styles = StyleSheet.create({
   deckContainer: {
     flex: 1,
-    alignItems: 'stretch',
-    marginTop: 0
   },
   boxContainer: {
-    height: 100
+    height: 100,
+    borderWidth: 1
   },
   box: {
     flex: 1,
@@ -89,4 +93,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Decks
+export default DeckList

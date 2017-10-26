@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet, } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import Decks from './components/Decks'
+import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
 
 const DeckStack = StackNavigator({
-  Decks: {
-    screen: Decks,
+  DeckList: {
+    screen: DeckList,
     navigationOptions: {
       title: 'Decks'
     }
@@ -22,9 +22,9 @@ const DeckStack = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <DeckStack />
-      </ScrollView>
+      </View>
     );
   }
 }
