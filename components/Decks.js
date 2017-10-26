@@ -1,29 +1,65 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+
+const decksItems = [
+  {
+    name: 'UdaciCards',
+    cards: 1
+  },
+  {
+    name: 'React Cards',
+    cards: 0
+  },
+  {
+    name: 'New Deck1',
+    cards: 3
+  },
+  {
+    name: 'deck4',
+    cards: 2
+  },
+  {
+    name: 'deck5',
+    cards: 5
+  },
+  {
+    name: 'deck6',
+    cards: 0
+  },
+  {
+    name: 'deck7',
+    cards: 0
+  }
+]
 
 class Deck extends Component {
   render() {
-    const { deck, count } = this.props
+    const { deck, count, onDeckPress } = this.props
     return(
       <View style={styles.boxContainer}>
         <View style={styles.box}>
-          <Text style={styles.title}>{deck}</Text>
-          <Text style={styles.count}>{count} cards</Text>
+          <TouchableOpacity onPress={() => onDeckPress(deck)}>
+            <Text style={styles.title}>{deck}</Text>
+            <Text style={styles.count}>{count} cards</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
 
-
 class Decks extends Component {
+  onDeckPress = (deck) => {
+    this.props.navigation.navigate('DeckDetails', deck)
+  }
+
   render() {
-    const { decks } = this.props
     return(
       <View style={styles.deckContainer}>
-        {decks.map(deck => <Deck 
+        {decksItems.map(deck => <Deck
           key={deck.name}
-          deck={deck.name} 
+          deck={deck.name}
+          onDeckPress={this.onDeckPress} 
           count={deck.cards} />)}
       </View>
     )
@@ -34,13 +70,10 @@ const styles = StyleSheet.create({
   deckContainer: {
     flex: 1,
     alignItems: 'stretch',
-    marginTop: 20
+    marginTop: 0
   },
   boxContainer: {
-    height: 100,
-    backgroundColor: '#67d5b5',
-    borderBottomColor: '#379392',
-    borderBottomWidth: 2
+    height: 100
   },
   box: {
     flex: 1,
@@ -50,11 +83,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    color: '#fff'
   },
   count: {
     fontSize: 16,
-    color: '#fff'
   }
 })
 

@@ -1,43 +1,29 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 import Decks from './components/Decks'
+import DeckDetails from './components/DeckDetails'
 
-const decks = [
-  {
-    name: 'UdaciCards',
-    cards: 1
+const DeckStack = StackNavigator({
+  Decks: {
+    screen: Decks,
+    navigationOptions: {
+      title: 'Decks'
+    }
   },
-  {
-    name: 'React Cards',
-    cards: 0
-  },
-  {
-    name: 'New Deck1',
-    cards: 3
-  },
-  {
-    name: 'deck4',
-    cards: 2
-  },
-  {
-    name: 'deck5',
-    cards: 5
-  },
-  {
-    name: 'deck6',
-    cards: 0
-  },
-  {
-    name: 'deck7',
-    cards: 0
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      title: 'Detail'
+    }
   }
-]
+})
 
 export default class App extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Decks decks={decks}/>
+        <DeckStack />
       </ScrollView>
     );
   }
@@ -45,7 +31,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#c5e99b'
+    flex: 1
   }
 })
