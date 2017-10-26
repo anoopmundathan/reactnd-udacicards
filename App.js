@@ -13,9 +13,13 @@ const DeckStack = StackNavigator({
   },
   DeckDetails: {
     screen: DeckDetails,
-    navigationOptions: {
-      title: 'Detail'
-    }
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: 'white',
+      title: `${navigation.state.params}`,
+      headerStyle: {
+        backgroundColor: 'purple',
+      }
+    })
   }
 })
 
