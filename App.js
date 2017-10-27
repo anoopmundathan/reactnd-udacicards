@@ -3,15 +3,8 @@ import { Text, View, ScrollView, StyleSheet, } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
+import AddDeck from './components/AddDeck'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-
-const AddDeck = () => {
-  return(
-    <View>
-      <Text>AddDeck</Text>
-    </View>
-  )
-}
 
 const Tabs = TabNavigator({
   All: {
