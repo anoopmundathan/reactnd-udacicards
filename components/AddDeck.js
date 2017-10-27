@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { 
+  KeyboardAvoidingView,
   View, 
   Text, 
   TextInput,
@@ -23,7 +24,7 @@ class AddDeck extends Component {
   render() {
     const { text } = this.state
     return(
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>What is the title of your new deck?</Text>
         </View>
@@ -39,7 +40,7 @@ class AddDeck extends Component {
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>          
         </View>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   enterContainer: {
-    flex:1,
+    flex: 1,
   },
   input: {
     width: 250,
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
   buttonContainer: {
-    flex:1,
+    flex: 1,
   },
   button: {
     padding: 10,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 40,
     marginRight: 40,
-    marginTop: 30,
+    marginTop: 40,
     backgroundColor: 'black'
   },
   buttonText: {
