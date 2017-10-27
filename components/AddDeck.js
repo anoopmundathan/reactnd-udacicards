@@ -18,7 +18,7 @@ class AddDeck extends Component {
   }
 
   onSubmitButton = () => {
-    // Save to Redux
+    this.props.navigation.goBack()
   }
 
   render() {
@@ -30,6 +30,7 @@ class AddDeck extends Component {
         </View>
         <View style={styles.enterContainer}>
           <TextInput
+            placeholder='Deck Title'
             onChangeText={this.onInputChange}
             style={styles.input}/>
         </View>
