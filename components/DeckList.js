@@ -6,36 +6,7 @@ import {
   StyleSheet, 
   TouchableOpacity } from 'react-native'
 
-const decksItems = [
-  {
-    name: 'UdaciCards',
-    cards: 1
-  },
-  {
-    name: 'React Cards',
-    cards: 0
-  },
-  {
-    name: 'New Deck1',
-    cards: 3
-  },
-  {
-    name: 'deck4',
-    cards: 2
-  },
-  {
-    name: 'deck5',
-    cards: 5
-  },
-  {
-    name: 'deck6',
-    cards: 0
-  },
-  {
-    name: 'deck7',
-    cards: 0
-  }
-]
+import { connect } from 'react-redux'
 
 class Deck extends Component {
   render() {
@@ -59,9 +30,10 @@ class DeckList extends Component {
   }
 
   render() {
+    const { decks } = this.props
     return(
       <ScrollView style={styles.deckContainer}>
-        {decksItems.map(deck => <Deck
+        {decks.map(deck => <Deck
           key={deck.name}
           deck={deck.name}
           onDeckPress={this.onDeckPress} 
@@ -96,4 +68,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DeckList
+function mapStateToProps({ deckItems}) {
+  return {
+    decks: deckItems
+  }
+}
+
+export default connect(mapStateToProps)(DeckList)

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 import { Text, View, ScrollView, StyleSheet, } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
@@ -45,9 +48,11 @@ const DeckStack = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <DeckStack />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <DeckStack />
+        </View>
+      </Provider>
     );
   }
 }

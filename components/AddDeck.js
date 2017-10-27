@@ -8,6 +8,9 @@ import {
   TouchableOpacity
  } from 'react-native'
 
+import { addDeck } from '../actions'
+import { connect } from 'react-redux'
+
 class AddDeck extends Component {
   state = {
     text: ''
@@ -18,6 +21,8 @@ class AddDeck extends Component {
   }
 
   onSubmitButton = () => {
+    const { text } = this.state
+    this.props.addDeck({ name : text })
     this.props.navigation.goBack()
   }
 
@@ -95,4 +100,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AddDeck
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addDeck: (deck) => dispatch(addDeck(deck))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddDeck)
