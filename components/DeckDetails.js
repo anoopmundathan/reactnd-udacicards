@@ -11,10 +11,10 @@ class DeckDetail extends Component {
           <Text style={styles.card}>{count}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, {backgroundColor: 'lightblue'}]}>
+          <TouchableOpacity style={[styles.button, {backgroundColor: 'purple'}]}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: 'blue'}]}>
+          <TouchableOpacity style={[styles.button, {backgroundColor: 'black'}]}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
