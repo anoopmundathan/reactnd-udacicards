@@ -1,12 +1,38 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { Text, View, ScrollView, StyleSheet, } from 'react-native'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+
+const AddDeck = () => {
+  return(
+    <View>
+      <Text>AddDeck</Text>
+    </View>
+  )
+}
+
+const Tabs = TabNavigator({
+  All: {
+    screen: DeckList,
+    navigationOptions: {
+      tabBarLabel: 'All Decks',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-card' size={30} color={tintColor} />
+    }
+  },
+  Add: {
+    screen: AddDeck,
+    navigationOptions: {
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add-circle' size={30} color={tintColor} />
+    }
+  }
+})
 
 const DeckStack = StackNavigator({
   DeckList: {
-    screen: DeckList,
+    screen: Tabs,
     navigationOptions: {
       title: 'Decks'
     }

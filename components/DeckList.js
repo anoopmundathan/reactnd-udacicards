@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
   },
   boxContainer: {
     height: 100,
-    borderWidth: 1
+    borderWidth: 1,
+    borderColor: '#c5c6b6'
   },
   box: {
     flex: 1,
@@ -87,9 +88,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+    textAlign: 'center'
   },
   count: {
     fontSize: 16,
+    textAlign: 'center'
   }
 })
 
