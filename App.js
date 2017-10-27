@@ -15,7 +15,7 @@ const DeckStack = StackNavigator({
     screen: DeckDetails,
     navigationOptions: ({ navigation }) => ({
       headerTintColor: 'white',
-      title: `${navigation.state.params}`,
+      title: `${navigation.state.params.deck}`,
       headerStyle: {
         backgroundColor: 'purple',
       }

@@ -43,7 +43,7 @@ class Deck extends Component {
     return(
       <View style={styles.boxContainer}>
         <View style={styles.box}>
-          <TouchableOpacity onPress={() => onDeckPress(deck)}>
+          <TouchableOpacity onPress={() => onDeckPress({ deck, count })}>
             <Text style={styles.title}>{deck}</Text>
             <Text style={styles.count}>{count} cards</Text>
           </TouchableOpacity>
@@ -54,8 +54,8 @@ class Deck extends Component {
 }
 
 class DeckList extends Component {
-  onDeckPress = (deck) => {
-    this.props.navigation.navigate('DeckDetails', deck)
+  onDeckPress = ({ deck, count }) => {
+    this.props.navigation.navigate('DeckDetails', { deck, count })
   }
 
   render() {
