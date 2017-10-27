@@ -1,18 +1,41 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+  View, 
+  Text, 
+  TextInput,
+  StyleSheet, 
+  TouchableOpacity
+ } from 'react-native'
 
 class AddDeck extends Component {
+  state = {
+    text: ''
+  }
+
+  onInputChange = (text) => {
+    this.setState({ text })
+  }
+
+  onSubmitButton = () => {
+    // Save to Redux
+  }
+
   render() {
+    const { text } = this.state
     return(
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>What is the title of your new deck?</Text>
         </View>
         <View style={styles.enterContainer}>
-          <Text>Enter</Text>
+          <TextInput
+            onChangeText={this.onInputChange}
+            style={styles.input}/>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity 
+            onPress={this.onSubmitButton}
+            style={styles.button}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>          
         </View>
@@ -41,6 +64,15 @@ const styles = StyleSheet.create({
   },
   enterContainer: {
     flex:1,
+  },
+  input: {
+    width: 250,
+    height: 50,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#757575',
+    margin: 20,
+    fontSize: 25
   },
   buttonContainer: {
     flex:1,
