@@ -22,7 +22,10 @@ class AddDeck extends Component {
 
   onSubmitButton = () => {
     const { text } = this.state
-    this.props.addDeck({ name : text })
+    this.props.addDeck({ 
+      name: text,
+      cards: 0 
+    })
     this.props.navigation.goBack()
   }
 
