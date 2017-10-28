@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class DeckDetail extends Component {
   render() {
-    const { deck, count } = this.props.navigation.state.params
+    const { name, count } = this.props.navigation.state.params
     return(
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{deck}</Text>
+          <Text style={styles.title}>{name}</Text>
           <Text style={styles.card}>{count}</Text>
         </View>
         <View style={styles.buttonContainer}>

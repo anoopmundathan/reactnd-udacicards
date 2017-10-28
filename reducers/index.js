@@ -3,6 +3,7 @@ import { ADD_DECK } from '../actions'
 const initialState = {
   deckItems: [
     {
+      id: 901,
       name: 'UdaciCards',
       cards: 1
     }

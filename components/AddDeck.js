@@ -8,6 +8,7 @@ import {
   TouchableOpacity
  } from 'react-native'
 
+import uuid from 'uuid/v1'
 import { addDeck } from '../actions'
 import { connect } from 'react-redux'
 
@@ -23,6 +24,7 @@ class AddDeck extends Component {
   onSubmitButton = () => {
     const { text } = this.state
     this.props.addDeck({ 
+      id: uuid(),
       name: text,
       cards: 0 
     })

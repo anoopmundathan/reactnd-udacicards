@@ -10,12 +10,12 @@ import { connect } from 'react-redux'
 
 class Deck extends Component {
   render() {
-    const { deck, count, onDeckPress } = this.props
+    const { name, count, onDeckPress } = this.props
     return(
       <View style={styles.boxContainer}>
         <View style={styles.box}>
-          <TouchableOpacity onPress={() => onDeckPress({ deck, count })}>
-            <Text style={styles.title}>{deck}</Text>
+          <TouchableOpacity onPress={() => onDeckPress({ name, count })}>
+            <Text style={styles.title}>{name}</Text>
             <Text style={styles.count}>{count} cards</Text>
           </TouchableOpacity>
         </View>
@@ -25,19 +25,19 @@ class Deck extends Component {
 }
 
 class DeckList extends Component {
-  onDeckPress = ({ deck, count }) => {
-    this.props.navigation.navigate('DeckDetails', { deck, count })
+  onDeckPress = ({ name, count }) => {
+    this.props.navigation.navigate('DeckDetails', { name, count })
   }
 
   render() {
     const { decks } = this.props
     return(
       <ScrollView style={styles.deckContainer}>
-        {decks.map(deck => <Deck
-          key={deck.name}
-          deck={deck.name}
-          onDeckPress={this.onDeckPress} 
-          count={deck.cards} />)}
+        {decks.map(deck => <Deck 
+          key={deck.id}
+          name={deck.name}
+          count={deck.count}
+          onDeckPress={this.onDeckPress} />)}
       </ScrollView>
     )
   }
