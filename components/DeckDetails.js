@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class DeckDetail extends Component {
+
+  onAddCard = () => {
+    const { name, count } = this.props.navigation.state.params
+    this.props.navigation.navigate('AddCard', { name })
+  }
+
   render() {
     const { name, count } = this.props.navigation.state.params
     return(
@@ -11,7 +17,9 @@ class DeckDetail extends Component {
           <Text style={styles.card}>{count}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, {backgroundColor: 'purple'}]}>
+          <TouchableOpacity 
+            onPress={this.onAddCard}
+            style={[styles.button, {backgroundColor: 'purple'}]}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.button, {backgroundColor: 'black'}]}>

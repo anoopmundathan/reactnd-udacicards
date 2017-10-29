@@ -33,10 +33,10 @@ class DeckList extends Component {
     const { decks } = this.props
     return(
       <ScrollView style={styles.deckContainer}>
-        {decks.map(deck => <Deck 
-          key={deck.id}
-          name={deck.name}
-          count={deck.count}
+        {Object.keys(decks).map(deck => <Deck 
+          key={decks[deck].title}
+          name={decks[deck].title}
+          count={decks[deck].questions.length}
           onDeckPress={this.onDeckPress} />)}
       </ScrollView>
     )
@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps({ deckItems}) {
+function mapStateToProps(state) {
   return {
-    decks: deckItems
+    decks: state
   }
 }
 

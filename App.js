@@ -6,6 +6,7 @@ import { Text, View, ScrollView, StyleSheet, } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
+import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
@@ -39,7 +40,17 @@ const DeckStack = StackNavigator({
       headerTintColor: 'white',
       title: `${navigation.state.params.name}`,
       headerStyle: {
-        backgroundColor: 'black',
+        backgroundColor: 'purple',
+      }
+    })
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: 'white',
+      title: `${navigation.state.params.name}`,
+      headerStyle: {
+        backgroundColor: 'purple',
       }
     })
   }

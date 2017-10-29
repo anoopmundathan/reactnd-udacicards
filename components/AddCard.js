@@ -8,21 +8,35 @@ import {
   TouchableOpacity
  } from 'react-native'
 
-import { addDeck } from '../actions'
+import { addCard } from '../actions'
 import { connect } from 'react-redux'
 
-class AddDeck extends Component {
+class AddCard extends Component {
   state = {
-    text: ''
+    question: '',
+    answer: ''
   }
 
-  onInputChange = (text) => {
-    this.setState({ text })
+  onQuestionChange = (text) => {
+    this.setState({
+      question: text
+    })
   }
 
-  onSubmitButton = () => {
-    const { text } = this.state
-    this.props.addDeck(text)
+  onAnswerChange = (text) => {
+    this.setState({
+      answer: text
+    })
+  }
+
+  onAddtButton = () => {
+    const { question, answer } = this.state
+    const deck = this.props.navigation.state.params.name
+    this.props.addCard({ 
+      question,
+      answer,
+      deck
+    })
     this.props.navigation.goBack()
   }
 
@@ -30,21 +44,22 @@ class AddDeck extends Component {
     const { text } = this.state
     return(
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>What is the title of your new deck?</Text>
-        </View>
         <View style={styles.enterContainer}>
           <TextInput
-            placeholder='Deck Title'
-            onChangeText={this.onInputChange}
+            placeholder='Question'
+            onChangeText={this.onQuestionChange}
             style={styles.input}/>
+          <TextInput
+          placeholder='Answer'
+          onChangeText={this.onAnswerChange}
+          style={styles.input}/>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
-            onPress={this.onSubmitButton}
+            onPress={this.onAddtButton}
             style={styles.button}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>          
+            <Text style={styles.buttonText}>Add Card</Text>
+          </TouchableOpacity>   
         </View>
       </KeyboardAvoidingView>
     )
@@ -102,8 +117,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addDeck: (deck) => dispatch(addDeck(deck))
+    addCard: (card) => dispatch(addCard(card))
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddDeck)
+export default connect(null, mapDispatchToProps)(AddCard)
