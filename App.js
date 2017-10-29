@@ -8,6 +8,7 @@ import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
 import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
+import Quiz from './components/Quiz'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 const Tabs = TabNavigator({
@@ -53,6 +54,9 @@ const DeckStack = StackNavigator({
         backgroundColor: 'purple',
       }
     })
+  },
+  Quiz: {
+    screen: Quiz
   }
 })
 

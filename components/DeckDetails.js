@@ -8,6 +8,10 @@ class DeckDetail extends Component {
     this.props.navigation.navigate('AddCard', { name })
   }
 
+  onStartQuiz = () => {
+    this.props.navigation.navigate('Quiz')
+  }
+
   render() {
     const { name, count } = this.props.navigation.state.params
     return(
@@ -22,7 +26,9 @@ class DeckDetail extends Component {
             style={[styles.button, {backgroundColor: 'purple'}]}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: 'black'}]}>
+          <TouchableOpacity 
+            onPress={this.onStartQuiz}
+            style={[styles.button, {backgroundColor: 'black'}]}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
