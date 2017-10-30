@@ -9,7 +9,8 @@ class DeckDetail extends Component {
   }
 
   onStartQuiz = () => {
-    this.props.navigation.navigate('Quiz')
+    const { name } = this.props.navigation.state.params
+    this.props.navigation.navigate('Quiz', { name })
   }
 
   render() {
