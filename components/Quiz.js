@@ -4,14 +4,21 @@ import { connect } from 'react-redux'
 
 class Quiz extends Component {
   state = {
-    count: 0
+    count: 0, 
+    answer: false
   }
+
+  onShowAnswer = () => {
+    this.setState({
+      answer: !this.state.answer
+    })
+  }
+
   onNext = () => {
     const { decks } = this.props
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
-
-    if (this.state.count > length) {
+    if (this.state.count >= length - 1) {
       this.setState({
         count: 0
       })
@@ -23,20 +30,42 @@ class Quiz extends Component {
   }
 
   render() {
+    const { count, answer} = this.state
     const { decks } = this.props
     const { name } = this.props.navigation.state.params
-    const index = this.state.count
-    
+    const length = decks[name].questions.length
     return(
-      <View>
-        <View style={{flex: 1}}>
-          <Text>{decks[name].questions[index].question}</Text>
+      <View style={{flex: 1}}>
+        <View>
+          <Text>{count + 1}/{length}</Text>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={styles.titleContainer}>
+          {answer && (
+            <Text style={styles.title}>{decks[name].questions[count].answer}</Text>
+          )}
+          {!answer && (
+            <Text style={styles.title}>{decks[name].questions[count].question}</Text>
+          )}
+          <TouchableOpacity
+            onPress={this.onShowAnswer}>
+            { answer && (
+              <Text style={{fontSize: 20, marginTop: 30}}>Show Question</Text>
+            )}
+
+            { !answer && (
+              <Text style={{fontSize: 20, marginTop: 30}}>Show Answer</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 1}}>
           <TouchableOpacity 
             onPress={this.onNext}
             style={styles.button}>
-            <Text style={styles.buttonText}>Next</Text>
+            <Text style={styles.buttonText}>Correct</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button, {backgroundColor: 'red'}]}>
+            <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -51,8 +80,13 @@ function mapStateToProps(state) {
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
+  titleContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 40
   },
   button: {
     padding: 10,
@@ -61,7 +95,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 40,
     marginTop: 40,
-    backgroundColor: 'black'
+    backgroundColor: 'green'
   },
   buttonText: {
     color: 'white',
