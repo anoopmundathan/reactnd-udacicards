@@ -4,21 +4,33 @@ import {
   View, 
   Text, 
   StyleSheet, 
-  TouchableOpacity } from 'react-native'
+  TouchableOpacity,
+  Animated
+ } from 'react-native'
 
 import { connect } from 'react-redux'
 
 class Deck extends Component {
+  state = {
+    opacity: new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    const { opacity } = this.state
+    Animated.timing(opacity, { toValue: 1, duration: 1000 }).start()
+  }
+
   render() {
     const { name, count, onDeckPress } = this.props
+    const { opacity } = this.state
     return(
       <View style={styles.boxContainer}>
-        <View style={styles.box}>
+        <Animated.View style={[styles.box, { opacity }]}>
           <TouchableOpacity onPress={() => onDeckPress({ name, count })}>
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.count}>{count} cards</Text>
           </TouchableOpacity>
-        </View>
+        </Animated.View>
       </View>
     )
   }

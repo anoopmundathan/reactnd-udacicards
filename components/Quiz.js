@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 class Quiz extends Component {
   state = {
     count: 0, 
-    answer: false
+    answer: false,
+    opacity: new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    const { opacity } = this.state
+    Animated.timing(opacity, { toValue: 1, duration: 1000 }).start()
   }
 
   onShowAnswer = () => {
@@ -30,30 +36,42 @@ class Quiz extends Component {
   }
 
   render() {
-    const { count, answer} = this.state
+    const { count, answer, opacity } = this.state
     const { decks } = this.props
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
     return(
-      <View style={{flex: 1}}>
+      <Animated.View style={[{flex: 1}, { opacity }]}>
         <View>
           <Text>{count + 1}/{length}</Text>
         </View>
         <View style={styles.titleContainer}>
           {answer && (
-            <Text style={styles.title}>{decks[name].questions[count].answer}</Text>
+            <Animated.Text 
+              style={[styles.title, { opacity }]}>
+              {decks[name].questions[count].answer}
+            </Animated.Text>
           )}
           {!answer && (
-            <Text style={styles.title}>{decks[name].questions[count].question}</Text>
+            <Animated.Text 
+              style={[styles.title, { opacity }]}>
+              {decks[name].questions[count].question}
+            </Animated.Text>
           )}
           <TouchableOpacity
             onPress={this.onShowAnswer}>
             { answer && (
-              <Text style={{fontSize: 20, marginTop: 30}}>Show Question</Text>
+              <Animated.Text 
+                style={[{fontSize: 20, marginTop: 30}, { opacity }]}>
+                Show Question
+              </Animated.Text>
             )}
 
             { !answer && (
-              <Text style={{fontSize: 20, marginTop: 30}}>Show Answer</Text>
+              <Animated.Text 
+                style={[{fontSize: 20, marginTop: 30}, { opacity }]}>
+                Show Answer
+              </Animated.Text>
             )}
           </TouchableOpacity>
         </View>
@@ -68,7 +86,7 @@ class Quiz extends Component {
             <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     )
   }
 }

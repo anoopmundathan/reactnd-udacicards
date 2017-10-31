@@ -1,7 +1,22 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity,
+  Animated
+ } from 'react-native'
 
 class DeckDetail extends Component {
+
+  state = {
+    opacity: new Animated.Value(0)
+  }
+  
+  componentDidMount() {
+    const { opacity } = this.state
+    Animated.timing(opacity, { toValue: 1, duration: 1000 }).start()
+  }
 
   onAddCard = () => {
     const { name, count } = this.props.navigation.state.params
@@ -15,8 +30,9 @@ class DeckDetail extends Component {
 
   render() {
     const { name, count } = this.props.navigation.state.params
+    const { opacity } = this.state
     return(
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { opacity }]}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.card}>{count}</Text>
@@ -33,7 +49,7 @@ class DeckDetail extends Component {
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     )
   }
 }
