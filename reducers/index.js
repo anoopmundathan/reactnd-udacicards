@@ -1,5 +1,7 @@
-import { ADD_DECK } from '../actions'
-import { ADD_CARD } from '../actions'
+import { 
+  ADD_DECK, 
+  ADD_CARD,
+  RECEIVE_DECKS } from '../actions'
 
 const initialState = {
   React: {
@@ -28,6 +30,11 @@ const initialState = {
 
 function decks(state = initialState, action) {
   switch(action.type) {
+    case RECEIVE_DECKS: 
+      return {
+        ...state, 
+        ...action.decks
+      }
     case ADD_DECK:
       const newDeck = {
         [action.deck]: {
