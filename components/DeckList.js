@@ -9,6 +9,7 @@ import {
  } from 'react-native'
 
 import { connect } from 'react-redux'
+import { fetchUdaciCards } from '../utils/api'
 
 class Deck extends Component {
   state = {
@@ -37,6 +38,12 @@ class Deck extends Component {
 }
 
 class DeckList extends Component {
+  
+  componentDidMount() {
+    // Get all flash cards from AsyncStorage
+    fetchUdaciCards()
+  }
+
   onDeckPress = ({ name, count }) => {
     this.props.navigation.navigate('DeckDetails', { name, count })
   }
