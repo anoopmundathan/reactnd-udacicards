@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux'
 import { fetchUdaciCards } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 class Deck extends Component {
   state = {
@@ -42,6 +43,7 @@ class DeckList extends Component {
   componentDidMount() {
     // Get all flash cards from AsyncStorage
     fetchUdaciCards()
+    .then(decks => this.props.receiveDecks(decks))
   }
 
   onDeckPress = ({ name, count }) => {
@@ -50,6 +52,13 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props
+    if(decks === null) {
+      return(
+        <View>
+          Loading
+        </View>
+      )
+    }
     return(
       <ScrollView style={styles.deckContainer}>
         {Object.keys(decks).map(deck => <Deck 
@@ -87,10 +96,18 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps(state) {
+
+const mapStateToProps = (state) => {
   return {
     decks: state
   }
 }
 
-export default connect(mapStateToProps)(DeckList)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    receiveDecks: (decks) => dispatch(receiveDecks(decks))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
