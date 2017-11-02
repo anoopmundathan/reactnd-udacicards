@@ -41,7 +41,6 @@ class Deck extends Component {
 class DeckList extends Component {
   
   componentDidMount() {
-    // Get all flash cards from AsyncStorage
     fetchUdaciCards()
     .then(decks => this.props.receiveDecks(decks))
   }
@@ -52,22 +51,25 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props
-    if(decks === null) {
+    if(Object.keys(decks).length === 0) {
       return(
         <View>
-          Loading
+          <Text>
+            Loading...
+          </Text>
         </View>
       )
+    } else {
+      return(
+        <ScrollView style={styles.deckContainer}>
+          {Object.keys(decks).map(deck => <Deck 
+            key={decks[deck].title}
+            name={decks[deck].title}
+            count={decks[deck].questions.length}
+            onDeckPress={this.onDeckPress} />)}
+        </ScrollView>
+      )
     }
-    return(
-      <ScrollView style={styles.deckContainer}>
-        {Object.keys(decks).map(deck => <Deck 
-          key={decks[deck].title}
-          name={decks[deck].title}
-          count={decks[deck].questions.length}
-          onDeckPress={this.onDeckPress} />)}
-      </ScrollView>
-    )
   }
 }
 
@@ -97,9 +99,10 @@ const styles = StyleSheet.create({
 })
 
 
-const mapStateToProps = (state) => {
+
+const mapStateToProps = decks => {
   return {
-    decks: state
+    decks
   }
 }
 
@@ -108,6 +111,5 @@ const mapDispatchToProps = (dispatch) => {
     receiveDecks: (decks) => dispatch(receiveDecks(decks))
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckList)

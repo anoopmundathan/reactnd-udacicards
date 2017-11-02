@@ -8,6 +8,10 @@ const initialData = {
       {
         question: 'What is React?',
         answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
       }
     ]
   },
@@ -29,7 +33,7 @@ export function fetchUdaciCards() {
         AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(initialData))
         return initialData
       } else {
-        return results
+        return JSON.parse(results)
       }
     })
 }
