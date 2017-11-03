@@ -8,8 +8,9 @@ import {
   TouchableOpacity
  } from 'react-native'
 
-import { addCard } from '../actions'
-import { connect } from 'react-redux'
+ import { addCard } from '../actions'
+ import { addCardToDeck } from '../utils/api'
+ import { connect } from 'react-redux'
 
 class AddCard extends Component {
   state = {
@@ -37,6 +38,7 @@ class AddCard extends Component {
       answer,
       deck
     })
+    addCardToDeck(deck, { question, answer })
     this.props.navigation.goBack()
   }
 

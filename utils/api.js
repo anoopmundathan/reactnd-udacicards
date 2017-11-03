@@ -45,5 +45,14 @@ export function saveDeckTitle(title) {
       questions: []
     }
   }))
+}
 
+export function addCardToDeck(title, card) {
+  return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
+    .then(results => JSON.parse(results))
+    .then(results => {
+      results[title].questions.push(card)
+      AsyncStorage.setItem(UDACICARDS_STORAGE_KEY, JSON.stringify(results))
+      return results
+    })
 }
