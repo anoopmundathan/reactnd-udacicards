@@ -9,7 +9,7 @@ import {
  } from 'react-native'
 
 import { connect } from 'react-redux'
-import { fetchUdaciCards } from '../utils/api'
+import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
 
 class Deck extends Component {
@@ -41,7 +41,7 @@ class Deck extends Component {
 class DeckList extends Component {
   
   componentDidMount() {
-    fetchUdaciCards()
+    getDecks()
     .then(decks => this.props.receiveDecks(decks))
   }
 

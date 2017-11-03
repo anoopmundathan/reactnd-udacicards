@@ -9,6 +9,7 @@ import {
  } from 'react-native'
 
 import { addDeck } from '../actions'
+import { saveDeckTitle } from '../utils/api'
 import { connect } from 'react-redux'
 
 class AddDeck extends Component {
@@ -23,6 +24,7 @@ class AddDeck extends Component {
   onSubmitButton = () => {
     const { text } = this.state
     this.props.addDeck(text)
+    saveDeckTitle(text)
     this.props.navigation.goBack()
   }
 

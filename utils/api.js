@@ -26,7 +26,7 @@ const initialData = {
   }
 }
 
-export function fetchUdaciCards() {
+export function getDecks() {
   return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
     .then(results => {
       if(results === null) {
@@ -36,4 +36,14 @@ export function fetchUdaciCards() {
         return JSON.parse(results)
       }
     })
+}
+
+export function saveDeckTitle(title) {
+ return AsyncStorage.mergeItem(UDACICARDS_STORAGE_KEY, JSON.stringify({
+    [title]: {
+      title: title,
+      questions: []
+    }
+  }))
+
 }
