@@ -28,7 +28,7 @@ class Deck extends Component {
     return(
       <View style={styles.boxContainer}>
         <Animated.View style={[styles.box, { opacity }]}>
-          <TouchableOpacity onPress={() => onDeckPress({ name, count })}>
+          <TouchableOpacity onPress={() => onDeckPress({ name })}>
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.count}>{count} cards</Text>
           </TouchableOpacity>
@@ -45,8 +45,8 @@ class DeckList extends Component {
     .then(decks => this.props.receiveDecks(decks))
   }
 
-  onDeckPress = ({ name, count }) => {
-    this.props.navigation.navigate('DeckDetails', { name, count })
+  onDeckPress = ({ name }) => {
+    this.props.navigation.navigate('DeckDetails', { name })
   }
 
   render() {
@@ -97,8 +97,6 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
-
-
 
 const mapStateToProps = decks => {
   return {

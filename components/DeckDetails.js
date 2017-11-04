@@ -7,6 +7,8 @@ import {
   Animated
  } from 'react-native'
 
+import { connect } from 'react-redux'
+
 class DeckDetail extends Component {
 
   state = {
@@ -30,12 +32,13 @@ class DeckDetail extends Component {
 
   render() {
     const { name, count } = this.props.navigation.state.params
+    const { decks } = this.props
     const { opacity } = this.state
     return(
       <Animated.View style={[styles.container, { opacity }]}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.card}>{count} Cards</Text>
+          <Text style={styles.card}>{decks[name].questions.length} Cards</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
@@ -87,4 +90,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export default DeckDetail
+const mapStateToProps = (decks) => {
+  return { 
+    decks
+  }
+}
+export default connect(mapStateToProps)(DeckDetail)
