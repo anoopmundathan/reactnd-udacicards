@@ -32,10 +32,12 @@ class AddCard extends Component {
 
   onAddtButton = () => {
     const { question, answer } = this.state
-    const deck = this.props.navigation.state.params.name
-    this.props.addCard({ question, answer,deck })
-    addCardToDeck(deck, { question, answer })
-    this.props.navigation.goBack()
+    if(question && answer) {
+      const deck = this.props.navigation.state.params.name
+      this.props.addCard({ question, answer,deck })
+      addCardToDeck(deck, { question, answer })
+      this.props.navigation.goBack()
+    }
   }
 
   render() {
@@ -70,9 +72,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  titleContainer: {
+  enterContainer: {
     flex: 2,
-    marginTop: 50,
     marginLeft: 60,
     marginRight: 60,
     alignItems: 'center',
@@ -81,9 +82,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     textAlign: 'center'
-  },
-  enterContainer: {
-    flex: 1,
   },
   input: {
     width: 250,
@@ -101,10 +99,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7,
     height: 50,
+    width: 250,
     marginLeft: 40,
     marginRight: 40,
-    marginTop: 40,
-    backgroundColor: 'black'
+    backgroundColor: 'purple'
   },
   buttonText: {
     color: 'white',

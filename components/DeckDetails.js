@@ -34,6 +34,7 @@ class DeckDetail extends Component {
     const { name } = this.props.navigation.state.params
     const { decks } = this.props
     const { opacity } = this.state
+    const count = decks[name].questions.length
     return(
       <Animated.View style={[styles.container, { opacity }]}>
         <View style={styles.titleContainer}>
@@ -46,11 +47,13 @@ class DeckDetail extends Component {
             style={[styles.button, {backgroundColor: 'purple'}]}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            onPress={this.onStartQuiz}
-            style={[styles.button, {backgroundColor: 'black'}]}>
-            <Text style={styles.buttonText}>Start Quiz</Text>
-          </TouchableOpacity>
+          { count > 0 && (
+            <TouchableOpacity 
+              onPress={this.onStartQuiz}
+              style={[styles.button, {backgroundColor: 'black'}]}>
+              <Text style={styles.buttonText}>Start Quiz</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </Animated.View>
     )

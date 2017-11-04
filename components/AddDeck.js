@@ -47,7 +47,7 @@ class AddDeck extends Component {
           <TouchableOpacity 
             onPress={this.onSubmitButton}
             style={styles.button}>
-            <Text style={styles.buttonText}>Submit</Text>
+            <Text style={styles.buttonText}>Add Deck</Text>
           </TouchableOpacity>          
         </View>
       </KeyboardAvoidingView>
@@ -91,11 +91,12 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 7,
+    width: 250,
     height: 50,
     marginLeft: 40,
     marginRight: 40,
     marginTop: 40,
-    backgroundColor: 'black'
+    backgroundColor: 'purple'
   },
   buttonText: {
     color: 'white',
