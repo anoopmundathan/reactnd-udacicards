@@ -23,9 +23,11 @@ class AddDeck extends Component {
 
   onSubmitButton = () => {
     const { text } = this.state
-    this.props.addDeck(text)
-    saveDeckTitle(text)
-    this.props.navigation.goBack()
+    if(text) {
+      this.props.addDeck(text)
+      saveDeckTitle(text)
+      this.props.navigation.goBack()
+    }
   }
 
   render() {
