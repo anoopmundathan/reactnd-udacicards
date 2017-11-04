@@ -33,11 +33,7 @@ class AddCard extends Component {
   onAddtButton = () => {
     const { question, answer } = this.state
     const deck = this.props.navigation.state.params.name
-    this.props.addCard({ 
-      question,
-      answer,
-      deck
-    })
+    this.props.addCard({ question, answer,deck })
     addCardToDeck(deck, { question, answer })
     this.props.navigation.goBack()
   }

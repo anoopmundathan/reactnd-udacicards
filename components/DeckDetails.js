@@ -35,7 +35,7 @@ class DeckDetail extends Component {
       <Animated.View style={[styles.container, { opacity }]}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{name}</Text>
-          <Text style={styles.card}>{count}</Text>
+          <Text style={styles.card}>{count} Cards</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
