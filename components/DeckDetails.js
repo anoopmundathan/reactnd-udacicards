@@ -31,7 +31,7 @@ class DeckDetail extends Component {
   }
 
   render() {
-    const { name, count } = this.props.navigation.state.params
+    const { name } = this.props.navigation.state.params
     const { decks } = this.props
     const { opacity } = this.state
     return(

@@ -14,6 +14,8 @@ class Quiz extends Component {
   state = {
     count: 0, 
     answer: false,
+    finished: false,
+    correct: 0,
     opacity: new Animated.Value(0)
   }
 
@@ -23,31 +25,49 @@ class Quiz extends Component {
   }
 
   onShowAnswer = () => {
-    this.setState({
-      answer: !this.state.answer
-    })
+    this.setState({ answer: !this.state.answer })
   }
 
-  onNext = () => {
+  onClick = (value) => {
     const { decks } = this.props
+    const { count } = this.state
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
-    if (this.state.count >= length - 1) {
-      this.setState({
-        count: 0
-      })
+    const answer = decks[name].questions[count].answer
+    if (answer === value) {
+      this.setState({ correct: this.state.correct + 1 })
+    } 
+
+    if (count >= length - 1) {
+      this.setState({ finished: true })
     } else {
-      this.setState({
-        count: this.state.count + 1
-      })
+      this.setState({ count: this.state.count + 1 })
     }
   }
 
+  onDecks = () => {
+    this.props.navigation.navigate('DeckList')
+  }
+
   render() {
-    const { count, answer, opacity } = this.state
+    const { count, answer, opacity, finished } = this.state
     const { decks } = this.props
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
+    if(finished) {
+      return(
+        <View style={styles.finalContainer}>
+          <Text style={{fontSize: 30}}>Score: {this.state.correct}/{length}</Text>
+          <View>
+            <TouchableOpacity 
+              onPress={this.onDecks}
+              style={[styles.button, {marginTop: 50}]}>
+                <Text style={styles.buttonText}>Decks</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
     return(
       <Animated.View style={[{flex: 1}, { opacity }]}>
         <Indicator count={count} length={length} />
@@ -83,13 +103,14 @@ class Quiz extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
-            onPress={this.onNext}
+            onPress={() => this.onClick('Yes')}
             style={styles.button}>
-            <Text style={styles.buttonText}>Correct</Text>
+              <Text style={styles.buttonText}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity 
+          onPress={() => this.onClick('No')}
             style={[styles.button, {backgroundColor: 'red'}]}>
-            <Text style={styles.buttonText}>Incorrect</Text>
+              <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -116,6 +137,11 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  finalContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
