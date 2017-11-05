@@ -52,8 +52,9 @@ class Quiz extends Component {
   }
 
   onRestart = () => {
-    const { name } = this.props.navigation.state.params
-    this.props.navigation.navigate('Quiz', { name })
+    // const { name } = this.props.navigation.state.params
+    this.setState({ count: 0, answer: false, finished: false, correct: 0 })
+    // this.props.navigation.navigate('Quiz', { name })
   }
 
   onBackToDeck = () => {

@@ -26,7 +26,7 @@ class AddDeck extends Component {
     if(text) {
       this.props.addDeck(text)
       saveDeckTitle(text)
-      this.props.navigation.goBack()
+      this.props.navigation.navigate('DeckDetails', { name: text })
     }
   }
 
