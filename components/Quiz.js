@@ -34,7 +34,7 @@ class Quiz extends Component {
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
     const answer = decks[name].questions[count].answer
-    if (answer === value) {
+    if (answer === value.toLowerCase()) {
       this.setState({ correct: this.state.correct + 1 })
     } 
 
@@ -45,24 +45,35 @@ class Quiz extends Component {
     }
   }
 
-  onDecks = () => {
-    this.props.navigation.navigate('DeckList')
+  onRestart = () => {
+    const { name } = this.props.navigation.state.params
+    this.props.navigation.navigate('Quiz', { name })
+  }
+
+  onBackToDeck = () => {
+    this.props.navigation.goBack()
   }
 
   render() {
-    const { count, answer, opacity, finished } = this.state
+    const { count, answer, opacity, finished, correct } = this.state
     const { decks } = this.props
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
+    
     if(finished) {
       return(
         <View style={styles.finalContainer}>
-          <Text style={{fontSize: 30}}>Score: {this.state.correct}/{length}</Text>
+          <Text style={{fontSize: 30}}>Score: {correct} / {length}</Text>
           <View>
             <TouchableOpacity 
-              onPress={this.onDecks}
+              onPress={this.onRestart}
               style={[styles.button, {marginTop: 50}]}>
-                <Text style={styles.buttonText}>Decks</Text>
+                <Text style={styles.buttonText}>Restart Quiz</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={this.onBackToDeck}
+              style={[styles.button, {marginTop: 10}]}>
+                <Text style={styles.buttonText}>Back to Deck</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -103,12 +114,12 @@ class Quiz extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
-            onPress={() => this.onClick('Yes')}
+            onPress={() => this.onClick('yes')}
             style={styles.button}>
               <Text style={styles.buttonText}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => this.onClick('No')}
+          onPress={() => this.onClick('no')}
             style={[styles.button, {backgroundColor: 'red'}]}>
               <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
@@ -159,7 +170,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 40,
     marginBottom: 20,
-    backgroundColor: 'green'
+    backgroundColor: 'purple'
   },
   buttonText: {
     color: 'white',

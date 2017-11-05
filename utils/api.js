@@ -7,11 +7,11 @@ const initialData = {
     questions: [
       {
         question: 'Does React work with Android?',
-        answer: 'Yes'
+        answer: 'yes'
       },
       {
         question: 'React is a Framework developed by Google?',
-        answer: 'No'
+        answer: 'no'
       }
     ]
   },
