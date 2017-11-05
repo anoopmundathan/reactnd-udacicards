@@ -7,11 +7,11 @@ const initialData = {
     questions: [
       {
         question: 'Does React work with Android?',
-        answer: 'yes'
+        answer: true
       },
       {
         question: 'React is a Framework developed by Google?',
-        answer: 'no'
+        answer: false
       }
     ]
   },
@@ -20,7 +20,7 @@ const initialData = {
     questions: [
       {
         question: 'Closure is a combination of function?',
-        answer: 'Yes'
+        answer: true
       }
     ]
   }

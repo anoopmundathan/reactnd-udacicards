@@ -35,7 +35,7 @@ class Quiz extends Component {
     const { name } = this.props.navigation.state.params
     const length = decks[name].questions.length
     const answer = decks[name].questions[count].answer
-    if (answer === value.toLowerCase()) {
+    if (answer === value) {
       this.setState({ correct: this.state.correct + 1 })
     } 
 
@@ -45,7 +45,7 @@ class Quiz extends Component {
       // Set Local Notification
       clearLocalNotification()
         .then(setLocalNotification())
-        
+
     } else {
       this.setState({ count: this.state.count + 1 })
     }
@@ -92,7 +92,10 @@ class Quiz extends Component {
           {answer && (
             <Animated.Text 
               style={[styles.title, { opacity }]}>
-              {decks[name].questions[count].answer}
+              {decks[name].questions[count].answer 
+                ? <Text>Yes</Text>
+                : <Text>No</Text>
+              }
             </Animated.Text>
           )}
           {!answer && (
@@ -120,12 +123,12 @@ class Quiz extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
-            onPress={() => this.onClick('yes')}
+            onPress={() => this.onClick(true)}
             style={styles.button}>
               <Text style={styles.buttonText}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => this.onClick('no')}
+          onPress={() => this.onClick(false)}
             style={[styles.button, {backgroundColor: 'red'}]}>
               <Text style={styles.buttonText}>Incorrect</Text>
           </TouchableOpacity>
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 2,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   finalContainer: {
     flex: 1,
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 40
+    fontSize: 30
   },
   buttonContainer: {
     flex: 1,

@@ -5,7 +5,8 @@ import {
   Text, 
   TextInput,
   StyleSheet, 
-  TouchableOpacity
+  TouchableOpacity, 
+  Switch
  } from 'react-native'
 
  import { addCard } from '../actions'
@@ -15,29 +16,25 @@ import {
 class AddCard extends Component {
   state = {
     question: '',
-    answer: ''
+    answer: false,
   }
 
   onQuestionChange = (text) => {
-    this.setState({
-      question: text
-    })
-  }
-
-  onAnswerChange = (text) => {
-    this.setState({
-      answer: text
-    })
+    this.setState({ question: text })
   }
 
   onAddtButton = () => {
     const { question, answer } = this.state
-    if(question && answer) {
+    if(question) {
       const deck = this.props.navigation.state.params.name
-      this.props.addCard({ question, answer,deck })
+      this.props.addCard({ question, answer, deck })
       addCardToDeck(deck, { question, answer })
       this.props.navigation.goBack()
     }
+  }
+
+  handleToggleSwitch = () => {
+    this.setState({ answer: !this.state.answer })
   }
 
   render() {
@@ -46,13 +43,15 @@ class AddCard extends Component {
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <View style={styles.enterContainer}>
           <TextInput
-            placeholder='Question'
+            placeholder='Yes or No Question'
             onChangeText={this.onQuestionChange}
             style={styles.input}/>
-          <TextInput
-          placeholder='Answer'
-          onChangeText={this.onAnswerChange}
-          style={styles.input}/>
+          <View style={styles.yesNoContainer}>
+            <Text style={styles.yesNoText}>Yes or No</Text>
+            <Switch
+              value={this.state.answer}
+              onValueChange={this.handleToggleSwitch} />
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
@@ -73,24 +72,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   enterContainer: {
-    flex: 2,
+    flex: 1,
     marginLeft: 60,
     marginRight: 60,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  yesNoContainer: {
+    flex: 1,
+    height: 100,
+    flexDirection: 'row',
+  },
+  yesNoText: {
+    marginTop: 5,
+    marginRight: 20,
+    fontSize: 20
   },
   title: {
     fontSize: 40,
     textAlign: 'center'
   },
   input: {
-    width: 250,
+    width: 300,
     height: 50,
     padding: 10,
     borderWidth: 1,
     borderColor: '#757575',
     margin: 20,
-    fontSize: 25
+    marginTop: 100,
+    fontSize: 20
   },
   buttonContainer: {
     flex: 1,
