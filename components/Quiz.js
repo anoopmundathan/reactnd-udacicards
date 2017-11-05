@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { connect } from 'react-redux'
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 const Indicator = (props) => {
   return(
@@ -40,6 +41,11 @@ class Quiz extends Component {
 
     if (count >= length - 1) {
       this.setState({ finished: true })
+
+      // Set Local Notification
+      clearLocalNotification()
+        .then(setLocalNotification())
+        
     } else {
       this.setState({ count: this.state.count + 1 })
     }
