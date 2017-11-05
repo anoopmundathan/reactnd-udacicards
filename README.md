@@ -20,5 +20,6 @@ Open app in iOS or Android simulator
 ```
 
 ## Prerequisite
-Install Xcode for iOS simulator
-Install Android Studio for Android simulator
+* Install Xcode for iOS simulator
+
+* Install Android Studio for Android simulator
