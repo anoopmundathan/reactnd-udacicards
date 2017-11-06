@@ -121,10 +121,4 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addCard: (card) => dispatch(addCard(card))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(AddCard)
+export default connect(null, { addCard })(AddCard)
