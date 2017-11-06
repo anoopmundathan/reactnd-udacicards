@@ -22,6 +22,10 @@ class Deck extends Component {
     Animated.timing(opacity, { toValue: 1, duration: 1000 }).start()
   }
 
+  componentWillUnmount() {
+    this.state.opacity.removeAllListeners()
+  }
+
   render() {
     const { name, count, onDeckPress } = this.props
     const { opacity } = this.state
@@ -98,12 +102,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = decks => {
-  return {
-    decks
-  }
-}
-
+const mapStateToProps = decks => ( { decks })
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveDecks: (decks) => dispatch(receiveDecks(decks))
